@@ -21,7 +21,7 @@ class AccessTokensHttpClient extends HttpClient {
 	}
 
 	public function requestAccessTokenFromLogin(string $login, string $password): AccessTokenPayload {
-		$request = new RequestRefreshTokenFromLoginPayload($login, $password);
+		$request = new RequestRefreshTokenFromLoginPayload('OPEN-PUBLISHER', $login, $password);
 		return $this->post('from-login', $request, null, AccessTokenPayload::class);
 	}
 

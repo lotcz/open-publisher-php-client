@@ -28,7 +28,7 @@ class AccessTokenManager {
 	}
 
 	private function hasValidAccessToken(): bool {
-		return OAuthHelper::isValidToken($this->accesssToken);
+		return OAuthHelper::isValidToken($this->accessToken);
 	}
 
 	/**
