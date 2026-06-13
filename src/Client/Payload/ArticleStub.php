@@ -19,6 +19,8 @@ class ArticleStub extends EntityBase {
 
 	public ?DateTimeInterface $publishDate;
 
+	public string $header;
+
 	public ?string $imageName;
 
 	public ?string $previewText;
