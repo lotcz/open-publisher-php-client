@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zavadil\OpenPublisher\Client;
 
 use Zavadil\Common\Client\HttpClient;
+use Zavadil\Common\Helpers\PathHelper;
 use Zavadil\OpenPublisher\Client\Payload\ArticlesPage;
 
 class OpenPublisherClient extends HttpClient {
@@ -35,6 +36,10 @@ class OpenPublisherClient extends HttpClient {
 
 	public function updateLastSynced(\DateTimeInterface $date): void {
 		$this->put("articles-sync/{$this->destinationName}/last-synced", $date);
+	}
+
+	public function getImageUrl(string $imageName): string {
+		return PathHelper::of($this->baseUrl, "images/original", $imageName);
 	}
 
 }
