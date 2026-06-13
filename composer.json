@@ -1,22 +1,22 @@
 {
-	"name": "lotcz/open-publisher-php-client",
-	"version": "0.0.1",
-	"description": "PHP client for article synchronization",
-	"type": "library",
-	"license": "MIT",
-	"autoload": {
-		"psr-4": {
-			"Zavadil\\OpenPublisher\\": "src/"
-		}
-	},
-	"authors": [
-		{
-			"name": "Karel Zavadil",
-			"email": "karel@zavadil.eu"
-		}
-	],
-	"require": {
-		"php": "^8.3",
-		"lotcz/zavadil-php-common": "^3.0.0"
-	}
+  "name": "lotcz/open-publisher-php-client",
+  "version": "0.0.2",
+  "description": "PHP client for article synchronization",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Zavadil\\OpenPublisher\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Karel Zavadil",
+      "email": "karel@zavadil.eu"
+    }
+  ],
+  "require": {
+    "php": "^8.3",
+    "lotcz/zavadil-php-common": "^3.0.0"
+  }
 }

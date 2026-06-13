@@ -13,7 +13,7 @@ composer require lotcz/open-publisher-php-client
 ## Usage
 
 ```php
-use Zavadil\OpenPublisher\PhpClient;
+use Zavadil\OpenPublisher\Client\OpenPublisherClient;
 
 // Use the library functions here
 ```
