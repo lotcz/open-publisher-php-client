@@ -33,7 +33,7 @@ class OpenPublisherClient extends HttpClient {
 		);
 	}
 
-	public function updateLastSynced(\DateTime $date): void {
+	public function updateLastSynced(\DateTimeInterface $date): void {
 		$this->put("articles-sync/{$this->destinationName}/last-synced", $date);
 	}
 
