@@ -1,6 +1,6 @@
 {
   "name": "lotcz/open-publisher-php-client",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "PHP client for article synchronization",
   "type": "library",
   "license": "MIT",
