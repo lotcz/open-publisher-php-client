@@ -39,7 +39,7 @@ class OpenPublisherClient extends HttpClient {
 	}
 
 	public function getImageUrl(string $imageName): string {
-		return PathHelper::of($this->baseUrl, "images/original", $imageName);
+		return PathHelper::of($this->baseUrl, "images", $imageName, "original");
 	}
 
 }
