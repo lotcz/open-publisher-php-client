@@ -42,7 +42,7 @@ class OpenPublisherClient extends HttpClient {
 		return PathHelper::of($this->baseUrl, "images", $imageName, "original");
 	}
 
-	public function downloadImage(string $imageName, string $savePath): bool {
+	public function downloadImage(string $imageName, string $savePath) {
 		$url = $this->getImageUrl($imageName);
 
 		// Create directory recursively if it doesn't exist
@@ -53,16 +53,17 @@ class OpenPublisherClient extends HttpClient {
 
 		$fp = fopen($savePath, 'wb');
 		if (!$fp) {
-			return false;
+			throw new \Exception("Couldn't open file {$savePath} for writing.");
+			return;
 		}
 
 		$ch = curl_init($url);
 		curl_setopt_array($ch, [
-			CURLOPT_FILE           => $fp,   // write directly to file
+			CURLOPT_FILE => $fp,   // write directly to file
 			CURLOPT_FOLLOWLOCATION => true,  // follow redirects
-			CURLOPT_MAXREDIRS      => 10,    // max redirect hops
-			CURLOPT_TIMEOUT        => 30,
-			CURLOPT_USERAGENT      => 'Mozilla/5.0',
+			CURLOPT_MAXREDIRS => 10,    // max redirect hops
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_USERAGENT => 'Mozilla/5.0',
 		]);
 
 		curl_exec($ch);
@@ -72,10 +73,8 @@ class OpenPublisherClient extends HttpClient {
 
 		if ($error) {
 			unlink($savePath); // clean up partial file
-			return false;
+			throw new \Exception($error);
 		}
-
-		return true;
 	}
 
 }
