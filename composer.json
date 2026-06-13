@@ -1,6 +1,6 @@
 {
   "name": "lotcz/open-publisher-php-client",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "PHP client for article synchronization",
   "type": "library",
   "license": "MIT",
@@ -17,6 +17,7 @@
   ],
   "require": {
     "php": "^8.3",
-    "lotcz/zavadil-php-common": "^3.0.2"
+    "lotcz/zavadil-php-common": "^3.0.2",
+    "ext-curl": "*"
   }
 }

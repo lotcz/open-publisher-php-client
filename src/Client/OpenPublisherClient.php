@@ -42,4 +42,40 @@ class OpenPublisherClient extends HttpClient {
 		return PathHelper::of($this->baseUrl, "images", $imageName, "original");
 	}
 
+	public function downloadImage(string $imageName, string $savePath): bool {
+		$url = $this->getImageUrl($imageName);
+
+		// Create directory recursively if it doesn't exist
+		$dir = dirname($savePath);
+		if (!is_dir($dir)) {
+			mkdir($dir, 0755, true); // true = recursive
+		}
+
+		$fp = fopen($savePath, 'wb');
+		if (!$fp) {
+			return false;
+		}
+
+		$ch = curl_init($url);
+		curl_setopt_array($ch, [
+			CURLOPT_FILE           => $fp,   // write directly to file
+			CURLOPT_FOLLOWLOCATION => true,  // follow redirects
+			CURLOPT_MAXREDIRS      => 10,    // max redirect hops
+			CURLOPT_TIMEOUT        => 30,
+			CURLOPT_USERAGENT      => 'Mozilla/5.0',
+		]);
+
+		curl_exec($ch);
+		$error = curl_error($ch);
+		curl_close($ch);
+		fclose($fp);
+
+		if ($error) {
+			unlink($savePath); // clean up partial file
+			return false;
+		}
+
+		return true;
+	}
+
 }
