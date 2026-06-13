@@ -1,0 +1,8 @@
+services:
+  composer:
+    image: composer
+    container_name: php-common-composer
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: install
