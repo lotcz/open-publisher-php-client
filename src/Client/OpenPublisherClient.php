@@ -7,6 +7,8 @@ namespace Zavadil\OpenPublisher\Client;
 use Zavadil\Common\Client\HttpClient;
 use Zavadil\Common\Helpers\PathHelper;
 use Zavadil\OpenPublisher\Client\Payload\ArticlesPage;
+use Zavadil\OpenPublisher\Client\Payload\CategoriesPage;
+use Zavadil\OpenPublisher\Client\Payload\CategoryStub;
 
 class OpenPublisherClient extends HttpClient {
 
@@ -36,6 +38,27 @@ class OpenPublisherClient extends HttpClient {
 
 	public function updateLastSynced(\DateTimeInterface $date): void {
 		$this->put("articles-sync/{$this->destinationName}/last-synced", $date);
+	}
+
+	public function loadDestinationCategories(): CategoriesPage {
+		return $this->get(
+			"articles-sync/{$this->destinationName}/categories",
+			null,
+			CategoriesPage::class
+		);
+	}
+
+	public function updateCategory(CategoryStub $category): CategoryStub {
+		return $this->put(
+			"articles-sync/{$this->destinationName}/category",
+			$category,
+			null,
+			CategoryStub::class
+		);
+	}
+
+	public function loadArticleCategories(int $articleId): array {
+		return $this->get("articles-sync/{$articleId}/categories");
 	}
 
 	public function getImageUrl(string $imageName): string {
