@@ -48,17 +48,30 @@ class OpenPublisherClient extends HttpClient {
 		);
 	}
 
-	public function updateCategory(CategoryStub $category): CategoryStub {
-		return $this->put(
-			"articles-sync/{$this->destinationName}/category",
-			$category,
+	public function insertCategory(string $name): CategoryStub {
+		return $this->post(
+			"articles-sync/{$this->destinationName}/categories",
+			$name,
 			null,
 			CategoryStub::class
 		);
 	}
 
+	public function updateCategory(int $categoryId, string $name): CategoryStub {
+		return $this->put(
+			"articles-sync/{$this->destinationName}/categories/{$categoryId}",
+			$name,
+			null,
+			CategoryStub::class
+		);
+	}
+
+	public function deleteCategory(int $categoryId) {
+		$this->delete("articles-sync/{$this->destinationName}/categories/{$categoryId}");
+	}
+
 	public function loadArticleCategories(int $articleId): array {
-		return $this->get("articles-sync/{$articleId}/categories");
+		return $this->get("articles-sync/{$this->destinationName}/articles/{$articleId}/categories");
 	}
 
 	public function getImageUrl(string $imageName): string {
